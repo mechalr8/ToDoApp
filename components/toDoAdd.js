@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
-  Button,
   TextInput,
   View,
   Text,
@@ -22,8 +21,12 @@ export default function ToDoAdd({addTodoHandler}) {
         placeholder="new todo..."
         placeholderTextColor="#A6A65A"
         onChangeText={textChangeHandler}
+        multiline={true}
       />
-      <TouchableOpacity onPress={() => addTodoHandler(text)}>
+      <TouchableOpacity
+        onPress={() => {
+          addTodoHandler(text);
+        }}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>Add To Do</Text>
         </View>
