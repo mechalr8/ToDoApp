@@ -7,12 +7,14 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function EditToDo({
   isModalVisible,
   inputText,
   setInputText,
   onPressSaveEdit,
+  setIsModalVisible,
 }) {
   return (
     <Modal
@@ -23,7 +25,14 @@ export default function EditToDo({
       }}>
       <View style={styles.modalView}>
         <View style={styles.modalHeading}>
-          <Text style={styles.modalHeadingText}>Edit To Do:</Text>
+          <Icon.Button
+            name="angle-left"
+            size={30}
+            color="#ffff00"
+            onPress={() => setIsModalVisible(false)}
+            backgroundColor="#000000"
+          />
+          <Text style={styles.modalHeadingText}>Edit To Do</Text>
         </View>
         <View style={styles.modalContents}>
           <TextInput
@@ -76,9 +85,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 80,
     backgroundColor: '#000000',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingStart: 12,
   },
   modalHeadingText: {
     padding: 20,
+    marginLeft: 85,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 24,

@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, StyleSheet, View, Alert} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import Header from './components/header';
 import ToDoAdd from './components/toDoAdd';
 import ToDoItem from './components/toDoItem';
@@ -86,30 +93,37 @@ const App = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.contents}>
-        <ToDoAdd addTodoHandler={addTodoHandler} />
-        <View style={styles.list}>
-          <FlatList
-            data={todos}
-            renderItem={({item}) => (
-              <ToDoItem
-                item={item}
-                deleteTodoHandler={deleteTodoHandler}
-                editToDoHandler={editToDoHandler}
-              />
-            )}
-          />
-          <EditToDo
-            isModalVisible={isModalVisible}
-            inputText={inputText}
-            setInputText={setInputText}
-            onPressSaveEdit={onPressSaveEdit}
-          />
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+        console.log('Dismissed Keyboard');
+      }}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.contents}>
+          <ToDoAdd addTodoHandler={addTodoHandler} />
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              renderItem={({item}) => (
+                <ToDoItem
+                  item={item}
+                  deleteTodoHandler={deleteTodoHandler}
+                  editToDoHandler={editToDoHandler}
+                />
+              )}
+            />
+            <EditToDo
+              isModalVisible={isModalVisible}
+              inputText={inputText}
+              setInputText={setInputText}
+              onPressSaveEdit={onPressSaveEdit}
+              setIsModalVisible={setIsModalVisible}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
